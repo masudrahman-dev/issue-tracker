@@ -106,50 +106,73 @@ document.getElementById('reset_btn').addEventListener('click', () => {
 
 // level for updated version
 class Person {
-  constructor(id, name, email, message) {
-    this.id = id;
+  constructor(userId, name, email, message) {
+    this.userId = userId;
     this.name = name;
     this.email = email;
     this.message = message;
   }
 }
-
+const getInputValue = (id) => document.getElementById(id).value;
 document.getElementById('send_btn').addEventListener('click', () => {
-  const getInputValue = (id) => document.getElementById(id).value;
   const name = getInputValue('name_input');
   const email = getInputValue('email_input');
   const message = getInputValue('message_input');
   if (name !== '' && email !== '' && message !== '') {
-    let id = '';
+    let userId = '';
     const length = 5;
     const characters =
       'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
     const charactersLength = characters.length;
     for (let i = 0; i < length; i++) {
-      id += characters.charAt(Math.floor(Math.random() * charactersLength));
+      userId += characters.charAt(Math.floor(Math.random() * charactersLength));
     }
 
-    const person = new Person(id, name, email, message);
-    console.log(person);
-
+    const person = new Person(userId, name, email, message);
+    // console.log(person.userId);
     // store the object in localStorage with the key based on its id
-    localStorage.setItem(person.id, JSON.stringify(person));
-    clearInputField('name_input');
-    clearInputField('email_input');
-    clearInputField('message_input');
+    localStorage.setItem(person.userId, JSON.stringify(person));
+
+    setInputValue('name_input');
+    setInputValue('email_input');
+    setInputValue('message_input');
+    getUserData(userId);
   } else {
     alert('please fill up input field');
   }
 });
 
-const clearInputField = (id) => {
+const setInputValue = (id) => {
   document.getElementById(id).value = '';
+};
+const showUser = (id, value) => {
+  document.getElementById(id).value = value;
+};
+const getUserData = (userId) => {
+  const storedPerson = JSON.parse(localStorage.getItem(userId));
+  console.log(storedPerson.name);
+  // document.getElementById('name_input').value = storedPerson.name;
+  showUser('name_input', storedPerson.name);
+  showUser('email_input', storedPerson.email);
+  showUser('message_input', storedPerson.message);
+  console.log(storedPerson.name);
 };
 
 document.getElementById('reset_btn').addEventListener('click', () => {
   localStorage.clear();
 });
 
-// getItem
-const storedPerson = JSON.parse(localStorage.getItem('xJXe5'));
-console.log(storedPerson);
+// Get the input field element
+const inputField = document.getElementById('my-input');
+
+// Check if there is saved data in localStorage
+const savedData = localStorage.getItem('my-input-data');
+if (savedData) {
+  // If there is saved data, set the value of the input field to the saved data
+  inputField.value = savedData;
+}
+
+// Add an event listener to the input field to save its value to localStorage when it changes
+inputField.addEventListener('change', function () {
+  localStorage.setItem('my-input-data', inputField.value);
+});
