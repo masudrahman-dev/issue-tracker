@@ -119,23 +119,27 @@ document.getElementById('send_btn').addEventListener('click', () => {
   const name = getInputValue('name_input');
   const email = getInputValue('email_input');
   const message = getInputValue('message_input');
-  let id = '';
-  const length = 5;
-  const characters =
-    'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-  const charactersLength = characters.length;
-  for (let i = 0; i < length; i++) {
-    id += characters.charAt(Math.floor(Math.random() * charactersLength));
+  if (name !== '' && email !== '' && message !== '') {
+    let id = '';
+    const length = 5;
+    const characters =
+      'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+    const charactersLength = characters.length;
+    for (let i = 0; i < length; i++) {
+      id += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+
+    const person = new Person(id, name, email, message);
+    console.log(person);
+
+    // store the object in localStorage with the key based on its id
+    localStorage.setItem(person.id, JSON.stringify(person));
+    clearInputField('name_input');
+    clearInputField('email_input');
+    clearInputField('message_input');
+  } else {
+    alert('please fill up input field');
   }
-
-  const person = new Person(id, name, email, message);
-  console.log(person);
-
-  // store the object in localStorage with the key based on its id
-  localStorage.setItem(person.id, JSON.stringify(person));
-  clearInputField('name_input');
-  clearInputField('email_input');
-  clearInputField('message_input');
 });
 
 const clearInputField = (id) => {
