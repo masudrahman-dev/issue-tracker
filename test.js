@@ -62,6 +62,49 @@ document.getElementById('reset_btn').addEventListener('click', () => {
 });
 
 // level 4
+// class Person {
+//   constructor(id, name, email, message) {
+//     this.id = id;
+//     this.name = name;
+//     this.email = email;
+//     this.message = message;
+//   }
+// }
+// // const Masud = new Person('masud');
+// // console.log(Masud);
+// document.getElementById('send_btn').addEventListener('click', () => {
+//   const getInputValue = (id) => document.getElementById(id).value;
+//   const name = getInputValue('name_input');
+//   const email = getInputValue('email_input');
+//   const message = getInputValue('message_input');
+//   let id = '';
+//   const length = 5;
+//   const characters =
+//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
+//   const charactersLength = characters.length;
+//   for (let i = 0; i < length; i++) {
+//     id += characters.charAt(Math.floor(Math.random() * charactersLength));
+//   }
+
+//   // const person = { id, name, email, message };
+//   const Maud = new Person(id, name, email, message);
+//   console.log(Maud);
+
+//   localStorage.setItem('person', JSON.stringify(Maud));
+//   clearInputField('name_input');
+//   clearInputField('email_input');
+//   clearInputField('message_input');
+// });
+// const clearInputField = (id) => {
+//   document.getElementById(id).value = '';
+//   // console.log('ccc');
+// };
+
+// document.getElementById('reset_btn').addEventListener('click', () => {
+//   localStorage.clear();
+// });
+
+// level for updated version
 class Person {
   constructor(id, name, email, message) {
     this.id = id;
@@ -70,9 +113,7 @@ class Person {
     this.message = message;
   }
 }
-// const Masud = new Person('masud');
-// console.log(Masud);
-let personID = 0;
+
 document.getElementById('send_btn').addEventListener('click', () => {
   const getInputValue = (id) => document.getElementById(id).value;
   const name = getInputValue('name_input');
@@ -87,46 +128,24 @@ document.getElementById('send_btn').addEventListener('click', () => {
     id += characters.charAt(Math.floor(Math.random() * charactersLength));
   }
 
-  // const person = { id, name, email, message };
-  const Maud = new Person(id, name, email, message);
-  console.log(Maud);
+  const person = new Person(id, name, email, message);
+  console.log(person);
 
-  localStorage.setItem('person', JSON.stringify(Maud));
+  // store the object in localStorage with the key based on its id
+  localStorage.setItem(person.id, JSON.stringify(person));
   clearInputField('name_input');
   clearInputField('email_input');
   clearInputField('message_input');
 });
+
 const clearInputField = (id) => {
   document.getElementById(id).value = '';
-  // console.log('ccc');
 };
 
 document.getElementById('reset_btn').addEventListener('click', () => {
   localStorage.clear();
 });
 
-// function generateRandomId() {
-//   const timestamp = new Date().getTime().toString();
-//   const randomNumber = Math.floor(Math.random() * 10000).toString();
-//   return randomNumber + timestamp;
-// }
-
-// function generateRandomId() {
-//   const length = 5;
-//   let result = '';
-//   const characters =
-//     'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789';
-//   const charactersLength = characters.length;
-//   for (let i = 0; i < length; i++) {
-//     result += characters.charAt(Math.floor(Math.random() * charactersLength));
-//   }
-//   return result;
-// }
-
-// const randomId = generateRandomId();
-// console.log(randomId);
-
-// for (let i = 0; i < 99999; i++) {
-//   const randomId = generateRandomId();
-//   console.log(randomId);
-// }
+// getItem
+const storedPerson = JSON.parse(localStorage.getItem('xJXe5'));
+console.log(storedPerson);
