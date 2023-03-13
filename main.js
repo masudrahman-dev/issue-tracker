@@ -1,9 +1,9 @@
 // localStorage.clear();
 
-document
-  .getElementById('issueInputForm')
-  .addEventListener('submit', submitIssue);
-
+// document
+//   .getElementById('issueInputForm')
+//   .addEventListener('click', submitIssue);
+document.getElementById('add-btn').addEventListener('click', submitIssue);
 function submitIssue(e) {
   // get input value
   const getInputValue = (id) => document.getElementById(id).value;
@@ -13,7 +13,7 @@ function submitIssue(e) {
   const id = Math.floor(Math.random() * 100000000) + '';
   const status = 'Open';
   const issue = { id, description, severity, assignedTo, status };
-  console.log('issue :>> ', issue);
+  // console.log('issue :>> ', issue);
   let issues = [];
   if (localStorage.getItem('issues')) {
     issues = JSON.parse(localStorage.getItem('issues'));
@@ -21,9 +21,12 @@ function submitIssue(e) {
   issues.push(issue);
   localStorage.setItem('issues', JSON.stringify(issues));
 
-  document.getElementById('issueInputForm').reset();
+  // document.getElementById('issueInputForm').reset();
   fetchIssues();
   e.preventDefault();
+  // description = ''
+  document.getElementById('issueDescription').value = '';
+  document.getElementById('issueAssignedTo').value = '';
 }
 
 const closeIssue = (id) => {
