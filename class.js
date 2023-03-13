@@ -113,6 +113,7 @@ class Person {
     this.message = message;
   }
 }
+
 const getInputValue = (id) => document.getElementById(id).value;
 document.getElementById('send_btn').addEventListener('click', () => {
   const name = getInputValue('name_input');
@@ -129,14 +130,15 @@ document.getElementById('send_btn').addEventListener('click', () => {
     }
 
     const person = new Person(userId, name, email, message);
-    // console.log(person.userId);
+    // console.log(person.name);
     // store the object in localStorage with the key based on its id
     localStorage.setItem(person.userId, JSON.stringify(person));
-
+    // getLocalStorageValue(person.userId);
+    // reloadShowData(person.userId);
     setInputValue('name_input');
     setInputValue('email_input');
     setInputValue('message_input');
-    getUserData(userId);
+    // getUserData(person.userId);
   } else {
     alert('please fill up input field');
   }
@@ -148,31 +150,53 @@ const setInputValue = (id) => {
 const showUser = (id, value) => {
   document.getElementById(id).value = value;
 };
-const getUserData = (userId) => {
-  const storedPerson = JSON.parse(localStorage.getItem(userId));
-  console.log(storedPerson.name);
-  // document.getElementById('name_input').value = storedPerson.name;
-  showUser('name_input', storedPerson.name);
-  showUser('email_input', storedPerson.email);
-  showUser('message_input', storedPerson.message);
-  console.log(storedPerson.name);
-};
 
 document.getElementById('reset_btn').addEventListener('click', () => {
   localStorage.clear();
 });
 
 // Get the input field element
-const inputField = document.getElementById('my-input');
 
-// Check if there is saved data in localStorage
-const savedData = localStorage.getItem('my-input-data');
-if (savedData) {
-  // If there is saved data, set the value of the input field to the saved data
-  inputField.value = savedData;
-}
+// const getLocalStorageValue = (userId) => {
+//   // console.log(userId);
+//   // const storePerson = localStorage.getItem(userId);
+//   // const convertStorePerson = JSON.parse(storePerson);
+//   // console.log(convertStorePerson);
+//   // showUser('name_input', convertStorePerson.name);
+//   // showUser('email_input', convertStorePerson.email);
+//   // showUser('message_input', convertStorePerson.message);
+//   // console.log(storePerson);
+//   // console.log(convertStorePerson.name);
+// };
+// const reloadShowData = (userId) => {
+//   const storePerson = localStorage.getItem(userId);
+//   const convertStorePerson = JSON.parse(storePerson);
+//   if (convertStorePerson) {
+//     getLocalStorageValue();
+//   }
+// };
+// reloadShowData();
 
-// Add an event listener to the input field to save its value to localStorage when it changes
-inputField.addEventListener('change', function () {
-  localStorage.setItem('my-input-data', inputField.value);
-});
+
+
+
+
+
+
+// const inputField = document.getElementById('my-input');
+// // const name = getInputValue('name_input');
+// // const email = getInputValue('email_input');
+// // const message = getInputValue('message_input');
+// // Check if there is saved data in localStorage
+// const savedData = localStorage.getItem('my-input-data');
+// if (savedData) {
+//   // If there is saved data, set the value of the input field to the saved data
+//   // inputField.value = savedData;
+// }
+
+// // Add an event listener to the input field to save its value tasdaso localStorage when it changes
+// inputField.addEventListener('change', function () {
+//   // console.log(inputField.value);
+//   localStorage.setItem('my-input-data', inputField.value);
+//   inputField.value = '';
+// });
